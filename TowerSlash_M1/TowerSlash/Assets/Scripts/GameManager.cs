@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private GameObject swipeObject;
 
-    //private GameObject gameOverScreen;
 
     public Spawner spawner;
     public Player player;
@@ -51,6 +50,7 @@ public class GameManager : MonoBehaviour
                 {
                     KilledEnemy(i);                    
                     PowerUp();
+                    PlayerStats.instance.PlusScore();
                     if (isSpeedRun == false)
                     {
                         PlayerStats.instance.IncreaseEnergy(20.0f);
@@ -101,7 +101,12 @@ public class GameManager : MonoBehaviour
     }
     public void DashTap()
     {
-        Time.timeScale = timeScaleFactor;
+        if (!boosted)
+        {
+            Time.timeScale = timeScaleFactor;
+            PlayerStats.instance.PlusScore();
+        }
+            
     }
     public void ReturnSpeed()
     {
@@ -123,7 +128,7 @@ public class GameManager : MonoBehaviour
         }
         else if (boosted)
         {
-
+            PlayerStats.instance.PlusScore();
         }
         PlayerStats.instance.HealthCheck();
     }
@@ -164,9 +169,5 @@ public class GameManager : MonoBehaviour
     public void SetupSwiping(GameObject swiping)
     {
         swipeObject = swiping;
-    }
-    public void SetupEndScreen(GameObject EndScreen)
-    {
-        //gameOverScreen = EndScreen;
     }
 }
