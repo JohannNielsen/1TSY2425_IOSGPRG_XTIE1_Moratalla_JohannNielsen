@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            GameManager.instance.KilledEnemy(0);         
+            GameManager.instance.KilledEnemy(0);
+            GameManager.instance.ReduceHealth();
         }
     }
 }

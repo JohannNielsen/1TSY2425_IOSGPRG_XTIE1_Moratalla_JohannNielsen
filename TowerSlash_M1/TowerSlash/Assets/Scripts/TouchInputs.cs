@@ -7,8 +7,6 @@ public class TouchInputs : MonoBehaviour
 {
     public _ArrowDirection _swipeDirections = _ArrowDirection.Empty;
 
-    private bool _isStationed = false;
-
     private float _deadZone = 1;
 
     private Vector2 _initialTouchPosition;
@@ -24,7 +22,6 @@ public class TouchInputs : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             _initialTouchPosition = Input.GetTouch(0).position;
-            _isStationed = false;
         }
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
@@ -42,26 +39,38 @@ public class TouchInputs : MonoBehaviour
                 //Down
                 if (_initialTouchPosition.y > _endTouchPosition.y && distanceY > distanceX)
                 {
-                    SetDirection(_ArrowDirection.Down); 
+                    SetDirection(_ArrowDirection.Down);
+                    Debug.Log("SwipeDown");
                 }
 
                 // Left
                 if (_initialTouchPosition.x > _endTouchPosition.x && distanceX > distanceY)
                 {
                     SetDirection(_ArrowDirection.Left);
+                    Debug.Log("SwipeLeft");
                 }
                 // Up
                 if (_initialTouchPosition.y < _endTouchPosition.y && distanceY > distanceX)
                 {
-                    SetDirection(_ArrowDirection.Up);   
+                    SetDirection(_ArrowDirection.Up);
+                    Debug.Log("SwipeUp");
                 }
                 // Right
                 if (_initialTouchPosition.x < _endTouchPosition.x && distanceX > distanceY)
                 {
-                    SetDirection(_ArrowDirection.Right);       
+                    SetDirection(_ArrowDirection.Right);
+                    Debug.Log("SwipeRight");
                 }
             }
+            else
+            {
+                Debug.Log("Tap");
+                GameManager.instance.SetBoolDashTap(true);
+                GameManager.instance.DashTap();
+                SetDirection(_ArrowDirection.Tap);
+            }
         }
+
     }
     public void SetDirection(_ArrowDirection thisItemDirection)
     {
@@ -72,5 +81,11 @@ public class TouchInputs : MonoBehaviour
     {
         _swipeDirections = _ArrowDirection.Empty;
         GameManager.instance.ReturnSpeed();
+        if (GameManager.instance.GetBoolDashTap() == true)
+        {
+            
+        }
+        GameManager.instance.SetBoolDashTap(false);
+
     }
 }

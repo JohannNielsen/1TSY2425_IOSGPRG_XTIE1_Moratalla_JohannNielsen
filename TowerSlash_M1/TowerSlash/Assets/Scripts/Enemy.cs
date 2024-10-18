@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public Sprite[] reverseSprite;
     public enemyType thisEnemyType;
 
-    private bool isChangingSprite = true;
     private float timeElapsed = 0f;
     private float spriteChangeInterval = 0.2f;
     private void Awake()
@@ -51,7 +50,6 @@ public class Enemy : MonoBehaviour
     }
     public void StopChangeSprite()
     {
-        isChangingSprite = false;
         int randomizeEnemyType = Random.Range(0, 2);
         thisEnemyType = (enemyType)randomizeEnemyType;
 
