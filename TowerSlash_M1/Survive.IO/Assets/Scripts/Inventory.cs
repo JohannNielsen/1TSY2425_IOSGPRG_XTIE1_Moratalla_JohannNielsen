@@ -300,8 +300,8 @@ public class Inventory : MonoBehaviour
             yield return new WaitForSeconds(cooldown);
             if (shotgunAmmo >= 15)
             {
-                shotgunClip = 15;
-                shotgunAmmo = shotgunAmmo - 15;
+                shotgunClip = 6;
+                shotgunAmmo = shotgunAmmo - 6;
             }
             else
             {
