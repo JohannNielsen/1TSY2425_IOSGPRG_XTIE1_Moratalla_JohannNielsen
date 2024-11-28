@@ -1,12 +1,19 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private Transform nozzle;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private TextMeshProUGUI gunText;
+    [SerializeField] private TextMeshProUGUI reloadingText;
+
+    
+
+    
     public gunTypes thisGun;
     public int pistolAmmo;
     public int shotgunAmmo;
@@ -15,6 +22,8 @@ public class Inventory : MonoBehaviour
     public int pistolClip;
     public int shotgunClip;
     public int assaultClip;
+
+    public TextMeshProUGUI ammoDisplay;
 
     public GameObject pistolPrefab;
     public GameObject shotgunPrefab;
@@ -31,6 +40,35 @@ public class Inventory : MonoBehaviour
 
     private float cooldownTime;
     private bool canShoot = true;
+
+    public void Start()
+    {
+        ammoDisplay.text = GetCurrentAmmo().ToString();
+    }
+    void Update()
+    {
+        ammoDisplay.text = GetCurrentAmmo().ToString();
+        
+    }
+    private int GetCurrentAmmo()
+    {
+        if (currentGun == pistolPrefab)
+        {
+            return pistolClip;
+        }
+        else if (currentGun == shotgunPrefab)
+        {
+            return shotgunClip;
+        }
+        else if (currentGun == assaultPrefab)
+        {
+            return assaultClip;
+        }
+        else
+        {
+            return 0; 
+        }
+    }
     public void EquipPistol()
     {
         if (currentGun != null)
@@ -41,6 +79,7 @@ public class Inventory : MonoBehaviour
         currentGun.transform.parent = character.transform;
         thisGun = gunTypes.pistolGun;
         gunText.text = "pistol";
+        
     }
     public void EquipShotgun()
     {
@@ -167,6 +206,8 @@ public class Inventory : MonoBehaviour
         {
             canShoot = false;
 
+            
+
             pistolClip--;
             GameObject spawnBullet = Instantiate(bulletPrefab, nozzle.position, nozzle.rotation);
 
@@ -233,12 +274,12 @@ public class Inventory : MonoBehaviour
         if (canShoot == true)
         {
             canShoot = false;
-
+            reloadingText.gameObject.SetActive(true);
             yield return new WaitForSeconds(cooldown);
-            if (pistolAmmo >= 15)
+            if (pistolAmmo >= 9)
             {
-                pistolClip = 15;
-                pistolAmmo = pistolAmmo - 15;
+                pistolClip = 9;
+                pistolAmmo = pistolAmmo - 9;
             }
             else
             {
@@ -246,6 +287,7 @@ public class Inventory : MonoBehaviour
                 pistolAmmo = 0;
             }
             canShoot = true;
+            reloadingText.gameObject.SetActive(false);
         }
     }
 
@@ -254,7 +296,7 @@ public class Inventory : MonoBehaviour
         if (canShoot == true)
         {
             canShoot = false;
-
+            reloadingText.gameObject.SetActive(true);
             yield return new WaitForSeconds(cooldown);
             if (shotgunAmmo >= 15)
             {
@@ -267,6 +309,7 @@ public class Inventory : MonoBehaviour
                 shotgunAmmo = 0;
             }
             canShoot = true;
+            reloadingText.gameObject.SetActive(false);
         }
     }
 
@@ -275,12 +318,15 @@ public class Inventory : MonoBehaviour
         if (canShoot == true)
         {
             canShoot = false;
-
+            reloadingText.gameObject.SetActive(true);
             yield return new WaitForSeconds(cooldown);
-            if (assaultAmmo >= 15)
+
+            Debug.LogWarning("RELOADING....");
+            if (assaultAmmo >= 30)
             {
-                assaultClip = 15;
-                assaultAmmo = assaultAmmo - 15;
+                assaultClip = 30;
+                assaultAmmo = assaultAmmo - 30;
+
             }
             else
             {
@@ -288,6 +334,7 @@ public class Inventory : MonoBehaviour
                 assaultAmmo = 0;
             }
             canShoot = true;
+            reloadingText.gameObject.SetActive(false);
         }
     }
 }
