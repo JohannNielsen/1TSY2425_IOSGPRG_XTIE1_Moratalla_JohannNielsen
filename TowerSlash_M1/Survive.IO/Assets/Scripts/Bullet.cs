@@ -6,6 +6,10 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 10f;
 
+    public PlayerStats playerStats;
+
+    public float damage;
+
     private Rigidbody2D rb;
 
     private void Start()
@@ -23,14 +27,16 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.GetComponent<PlayerMovement>() != null)
         {
             Destroy(this.gameObject);
-            //add minus player health
-        } 
-        Debug.Log("ShotMyself");
-        Destroy(this.gameObject, 5.0f);
+            GameManager.playerStats.health -= damage;
+            Debug.Log("playerhit");
+        }
+        else if (collision.GetComponent<Enemy>() != null)
+        {
+            Destroy(this.gameObject);
+            //add minus enemy health
+        }
     }
-
 }

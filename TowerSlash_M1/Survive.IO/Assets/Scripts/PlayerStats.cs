@@ -4,32 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
-    public float startHealth = 100.0f;
-    private float health;
+    public float maxHealth = 100f;
+    public float health;
     public Image healthBar;
+
+    private bool isDead;
     void Start()
     {
-        health = startHealth;
-        healthBar.fillAmount = health / startHealth;
+        GameManager.playerStats = this;
+
+        maxHealth = health;
+        healthBar.fillAmount = health / maxHealth;
     }
 
     void Update()
     {
+        healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
 
-    }
-
-    public void TakeDamage(int damage)
-    {
-        this.health -= damage;
-        this.healthBar.fillAmount = health / startHealth;
-        if (health <= 0)
+        if(health <= 0 && !isDead)
         {
-            Die();
+            isDead = true;
+            Debug.Log("DEAD...");
         }
     }
 
     public void Die()
     {
-
+        
     }
 }
