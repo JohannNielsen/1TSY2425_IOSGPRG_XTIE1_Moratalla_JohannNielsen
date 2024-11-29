@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public bool isEnemyBullet;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,7 +38,12 @@ public class Bullet : MonoBehaviour
         else if (collision.GetComponent<Enemy>() != null)
         {
             Destroy(this.gameObject);
-            //add minus enemy health
+
+            if(isEnemyBullet == false)
+            {
+                Destroy(collision.gameObject);
+            }
+            
         }
     }
 }

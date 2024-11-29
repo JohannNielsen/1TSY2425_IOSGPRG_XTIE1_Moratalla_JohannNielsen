@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 632cda02bc394374092bff05eb1d4a78, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -200,3 +200,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisGun: 2
+  pistolButton: {fileID: 0}
+  shotgunButton: {fileID: 0}
+  ARButton: {fileID: 0}
+  prefabs:
+  - {fileID: 1702544219122812561}
+  - {fileID: 1669666001212243564, guid: 2d07f873ca44dc34cad3b25d9f8edb33, type: 3}
+  - {fileID: 2380554947609366573, guid: 03e8377999684244e8bdd39ff671e7a8, type: 3}
+  buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

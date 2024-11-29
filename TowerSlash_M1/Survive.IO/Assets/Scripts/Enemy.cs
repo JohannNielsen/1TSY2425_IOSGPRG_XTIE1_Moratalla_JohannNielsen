@@ -63,6 +63,12 @@ public class Enemy : MonoBehaviour
         moveAndRotateCoroutine = StartCoroutine(MoveAndRotate());
 
     }
+
+    public void TakeDamage()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void FirePlayer()
     {
         Instantiate(bulletPrefab, aiNozzle.position, aiNozzle.rotation);

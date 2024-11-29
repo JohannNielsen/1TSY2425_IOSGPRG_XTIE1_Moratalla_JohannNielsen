@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 632cda02bc394374092bff05eb1d4a78, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1544683, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,6 +116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisGun: 0
+  pistolButton: {fileID: 0}
+  shotgunButton: {fileID: 0}
+  ARButton: {fileID: 0}
 --- !u!1 &9032581700720495537
 GameObject:
   m_ObjectHideFlags: 0

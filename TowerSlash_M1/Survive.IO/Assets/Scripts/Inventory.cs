@@ -11,9 +11,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gunText;
     [SerializeField] private TextMeshProUGUI reloadingText;
 
-    
-
-    
     public gunTypes thisGun;
     public int pistolAmmo;
     public int shotgunAmmo;
